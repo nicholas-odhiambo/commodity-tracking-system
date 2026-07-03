@@ -2,11 +2,11 @@ from pydantic import BaseModel, field_validator
 from typing import Optional
 
 class CommodityCreate(BaseModel):
-    commodity_name: str 
+    name: str 
     unit_of_measure: str
     description: Optional[str] = None 
 
-    @field_validator("commodity_name")
+    @field_validator("name")
     @classmethod
     def validate_commodity_name(cls, value: str):
         value = value.strip()
