@@ -23,3 +23,7 @@ def create_commodity(payload:  CommodityCreate, db: Session = Depends(get_db)):
     
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
+    
+@router.get("/commodities/{commodity_id}")
+def get_commodities():
+    pass
