@@ -8,6 +8,7 @@ from app.repositories.commodity_repository import CommodityRepository
 
 router = APIRouter()
 
+#post commodity
 @router.post("/commodities")
 def create_commodity(payload:  CommodityCreate, db: Session = Depends(get_db)):
     repo = CommodityRepository(db)
@@ -23,7 +24,14 @@ def create_commodity(payload:  CommodityCreate, db: Session = Depends(get_db)):
     
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
-    
+
+#get by id
 @router.get("/commodities/{commodity_id}")
-def get_commodities():
-    pass
+def get_commodity(commodity_id: int, db: Session = Depends(get_db)):
+    repo = CommodityRepository(db)
+    service = CommodityService(repo)
+    try:
+        result = service.get_commodity(commodity_id)
+        return result
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
