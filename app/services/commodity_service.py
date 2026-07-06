@@ -20,4 +20,12 @@ class CommodityService:
         
         #save to db 
         return self.repo.create(commodity)
+
+    ## get commodity by id
+    def get_commodity(self, commodity_id: int):
+        commodity = self.repo.get_by_id(commodity_id)
+        if commodity is None:
+            raise ValueError("Commodity not found")
+        return commodity
+
         
