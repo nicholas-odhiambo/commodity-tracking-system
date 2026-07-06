@@ -12,6 +12,13 @@ class CommodityRepository:
         self.db.refresh(commodity)
         return commodity
     
+    #get commodity by name
     def get_by_name(self, name: str):
         return self.db.query(Commodity).filter(Commodity.name == name).first()
+    
+    #get commodity by id
+    def get_by_id(self, commodity_id: int):
+        return(
+            self.db.query(Commodity).filter(Commodity.id == commodity_id).first()
+        )
 
