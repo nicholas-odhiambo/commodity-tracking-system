@@ -41,7 +41,7 @@ class CommodityService:
         
         existing = self.repo.get_by_name(name)
         if existing is not None and existing.id != commodity.id:
-            raise ValueError("Commodity Name already exists")
+            raise ValueError("A commodity with this name already exists")
         
         commodity.name = name 
         commodity.unit_of_measure = unit_of_measure

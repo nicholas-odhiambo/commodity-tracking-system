@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from app.db.session import get_db
-from app.schemas.commodity import CommodityCreate
+from app.schemas.commodity import CommodityCreate, CommodityUpdate
 from app.services.commodity_service import CommodityService
 from app.repositories.commodity_repository import CommodityRepository
 
@@ -42,3 +42,23 @@ def get_commodities(db: Session = Depends(get_db)):
     repo = CommodityRepository(db)
     service = CommodityService(repo)
     return service.get_commodities()
+
+
+##update commodity 
+@router.put("/commodities/{commodity_id}")
+def update_commodity(commodity_id: int, payload: CommodityUpdate, db: Session = Depends(get_db)):
+    repo = CommodityRepository(db)
+    service = CommodityService(repo)
+
+    try:
+        result = service.update_commodity(
+            commodity_id=commodity_id,
+            name = payload.name,
+            unit_of_measure = payload.unit_of_measure,
+            description = payload.description,
+            is_active = payload.is_active
+        )
+        return result
+    
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
