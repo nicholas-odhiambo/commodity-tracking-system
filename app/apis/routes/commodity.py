@@ -35,3 +35,10 @@ def get_commodity(commodity_id: int, db: Session = Depends(get_db)):
         return result
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))
+
+#get all commodities
+@router.get("/commodities")
+def get_commodities(db: Session = Depends(get_db)):
+    repo = CommodityRepository(db)
+    service = CommodityService(repo)
+    return service.get_commodities()

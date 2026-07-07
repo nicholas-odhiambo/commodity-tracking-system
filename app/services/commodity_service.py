@@ -28,4 +28,7 @@ class CommodityService:
             raise ValueError("Commodity not found")
         return commodity
 
+    #get all comdities 
+    def get_commodities(self):
+        return self.repo.get_all()
         

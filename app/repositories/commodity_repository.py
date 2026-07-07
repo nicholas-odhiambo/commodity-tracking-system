@@ -22,3 +22,7 @@ class CommodityRepository:
             self.db.query(Commodity).filter(Commodity.id == commodity_id).first()
         )
 
+    #get all commodities
+    def get_all(self):
+        return self.db.query(Commodity).all()
+
