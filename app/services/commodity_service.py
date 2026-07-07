@@ -31,4 +31,21 @@ class CommodityService:
     #get all comdities 
     def get_commodities(self):
         return self.repo.get_all()
+
+    ## update a commodity 
+    def update_commodity(self, commodity_id: int, name: str, unit_of_measure: str, 
+                         description: str | None, is_active: bool  ):
+        commodity = self.repo.get_by_id(commodity_id)
+        if commodity is None:
+            raise ValueError("Commodity not found")
         
+        existing = self.repo.get_by_name(name)
+        if existing is not None and existing.id != commodity.id:
+            raise ValueError("Commodity Name already exists")
+        
+        commodity.name = name 
+        commodity.unit_of_measure = unit_of_measure
+        commodity.description = description
+        commodity.is_active = is_active
+
+        return self.repo.update(commodity)
