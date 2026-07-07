@@ -26,3 +26,9 @@ class CommodityRepository:
     def get_all(self):
         return self.db.query(Commodity).all()
 
+    ##update commodity 
+    def update(self, commodity: Commodity):
+        self.db.commit()
+        self.db.refresh(commodity)
+        return commodity
+
