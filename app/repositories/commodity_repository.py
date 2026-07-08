@@ -19,12 +19,12 @@ class CommodityRepository:
     #get commodity by id
     def get_by_id(self, commodity_id: int):
         return(
-            self.db.query(Commodity).filter(Commodity.id == commodity_id).first()
+            self.db.query(Commodity).filter(Commodity.id == commodity_id,Commodity.is_active).first()
         )
 
     #get all commodities
     def get_all(self):
-        return self.db.query(Commodity).all()
+        return self.db.query(Commodity).filter(Commodity.is_active).all() 
 
     ##update commodity 
     def update(self, commodity: Commodity):
