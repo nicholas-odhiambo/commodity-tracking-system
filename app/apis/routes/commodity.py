@@ -62,3 +62,14 @@ def update_commodity(commodity_id: int, payload: CommodityUpdate, db: Session = 
     
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
+
+##delete commodity 
+@router.delete("/commodities/{commodity_id}")
+def delete_commodity(commodity_id: int, db: Session = Depends(get_db)):
+    repo = CommodityRepository(db)
+    service = CommodityService(repo)
+    try:
+        result = service.delete_commodity(commodity_id)
+        return result
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
