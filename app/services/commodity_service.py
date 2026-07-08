@@ -59,7 +59,7 @@ class CommodityService:
         if commodity.is_active is False:
             raise ValueError("Commodity already deleted")
         
-        commodity.is_active = True
+        commodity.is_active = False
 
         return self.repo.update(commodity)  
         
