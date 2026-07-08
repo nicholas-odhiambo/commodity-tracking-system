@@ -49,3 +49,17 @@ class CommodityService:
         commodity.is_active = is_active
 
         return self.repo.update(commodity)
+
+    ##delete commodity
+    def delete_commodity(self, commodity_id: int):
+        commodity = self.repo.get_by_id(commodity_id)
+        if commodity is None: 
+                raise ValueError("Commodity not found")
+        
+        if commodity.is_active is False:
+            raise ValueError("Commodity already deleted")
+        
+        commodity.is_active = True
+
+        return self.repo.update(commodity)  
+        
