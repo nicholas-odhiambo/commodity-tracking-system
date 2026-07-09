@@ -12,3 +12,7 @@ class SupplierRepository:
         self.db.commit()
         self.db.refresh(supplier)
         return supplier
+    
+    #get supplier by name
+    def get_by_name(self, name: str):
+        return self.db.query(Supplier).filter(Supplier.name == name).first()
