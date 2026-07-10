@@ -22,3 +22,14 @@ def create_supplier(payload: SupplierCreate, db: Session = Depends(get_db)):
         return result
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
+
+## get by id
+@router.get("/suppliers/{supplier_id}")
+def get_supplier(supplier_id: int, db: Session = Depends(get_db)):
+    repo = SupplierRepository(db)
+    service = SupplierService(repo)
+    try:
+        result = service.get_supplier(supplier_id)
+        return result
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
