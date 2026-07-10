@@ -19,4 +19,11 @@ class SupplierService:
             email = email
         )
         self.repo.create(supplier) 
+
+    ##get supplier by id
+    def get_supplier(self, supplier_id: int):
+        supplier = self.repo.get_by_id(supplier_id)
+        if supplier is None:
+            raise ValueError("Supplier not found")
+        return supplier
         
