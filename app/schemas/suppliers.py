@@ -12,7 +12,7 @@ class SupplierCreate(BaseModel):
     def validate_supplier_name(cls, value: str):
         value = value.strip()
         if not value:
-            raise ValueError("Supplier Name cannot be empty or whitespace")
+            raise ValueError("Supplier Name or phone_no cannot be empty or have whitespace")
         return value
     
 class SupplierUpdate(BaseModel):
