@@ -15,4 +15,8 @@ class SupplierRepository:
     
     #get supplier by name
     def get_by_name(self, name: str):
-        return self.db.query(Supplier).filter(Supplier.name == name).first()
+        return self.db.query(Supplier).filter(Supplier.name == name).first() 
+
+    #get supplier by id
+    def get_by_id(self, supplier_id: int):
+        return self.db.query(Supplier).filter(Supplier.id == supplier_id,Supplier.is_active).firts()
