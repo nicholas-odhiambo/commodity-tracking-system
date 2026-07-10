@@ -19,4 +19,4 @@ class SupplierRepository:
 
     #get supplier by id
     def get_by_id(self, supplier_id: int):
-        return self.db.query(Supplier).filter(Supplier.id == supplier_id,Supplier.is_active).firts()
+        return self.db.query(Supplier).filter(Supplier.id == supplier_id,Supplier.is_active).first()
