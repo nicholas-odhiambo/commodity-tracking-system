@@ -25,3 +25,9 @@ class SupplierRepository:
     #get all suppliers 
     def get_all(self):
         return self.db.query(Supplier).filter(Supplier.is_active).all()
+
+    ##update fields
+    def update(self, supplier: Supplier):
+        self.db.commit()
+        self.db.refresh(supplier)
+        return supplier
