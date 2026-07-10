@@ -40,3 +40,4 @@ def get_suppliers(db: Session = Depends(get_db)):
     repo = SupplierRepository(db)
     service = SupplierService(repo)
     return service.get_suppliers()
+    

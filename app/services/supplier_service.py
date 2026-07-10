@@ -32,20 +32,29 @@ class SupplierService:
         return self.repo.get_all()
 
     ##update suppliers
-    def update_supplier(self,supplier_id: int,  name: str,  phone: str,  email: str | None, 
-                        is_active: bool):
+    def update_supplier(self,supplier_id: int,  name: str | None,  phone: str | None,  email: str | None, 
+                        is_active: bool | None ):
         supplier = self.repo.get_by_id(supplier_id)
         if supplier is None:
             raise ValueError("Supplier not found")
         
-        existing = self.repo.get_by_name(name)
-        if existing is not None and existing.id != supplier.id:
-            raise ValueError("A supplier with name already exists")
+        if name is not None:
+            existing = self.repo.get_by_name(name)
+
+            if existing is not None and existing.id != supplier.id:
+                raise ValueError("A supplier with name already exists")
         
-        supplier.name = name
-        supplier.phone = phone 
-        supplier.email = email 
-        supplier.is_active = is_active
+        if name is not None:
+            supplier.name = name
+        
+        if phone is not None:
+            supplier.phone = phone 
+        
+        if email is not None:
+            supplier.email = email 
+        
+        if is_active is not None:
+            supplier.is_active = is_active
 
         return self.repo.update(supplier)
         
