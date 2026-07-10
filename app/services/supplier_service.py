@@ -26,4 +26,8 @@ class SupplierService:
         if supplier is None:
             raise ValueError("Supplier not found")
         return supplier
+    
+    #get all suppliers 
+    def get_suppliers(self):
+        return self.repo.get_all()
         

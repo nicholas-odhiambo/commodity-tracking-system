@@ -33,3 +33,10 @@ def get_supplier(supplier_id: int, db: Session = Depends(get_db)):
         return result
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))
+
+#get all suppliers 
+@router.get("/suppliers")
+def get_suppliers(db: Session = Depends(get_db)):
+    repo = SupplierRepository(db)
+    service = SupplierService(repo)
+    return service.get_suppliers()
