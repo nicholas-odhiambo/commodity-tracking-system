@@ -58,3 +58,14 @@ def update_supplier(supplier_id: int, payload: SupplierUpdate, db: Session = Dep
         return result
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))
+
+#delete supplier
+@router.delete("/supplier/{supplier_id}")
+def delete_supplier(supplier_id: int, db: Session = Depends(get_db)):
+    repo = SupplierRepository(db)
+    service = SupplierService(repo)
+    try:
+        result = service.delete_supplier(supplier_id)
+        return result
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))

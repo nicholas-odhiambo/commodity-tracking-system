@@ -31,3 +31,4 @@ class SupplierRepository:
         self.db.commit()
         self.db.refresh(supplier)
         return supplier
+    

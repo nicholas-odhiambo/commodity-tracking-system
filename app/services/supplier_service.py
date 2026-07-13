@@ -57,4 +57,15 @@ class SupplierService:
             supplier.is_active = is_active
 
         return self.repo.update(supplier)
+
+    #delete supplier 
+    def delete_supplier(self, supplier_id: int):
+        supplier = self.repo.get_by_id(supplier_id)
+        if supplier is None:
+            raise ValueError("The supplier does not exist")
+
+        if supplier.is_active is False:
+            raise ValueError("The supplier has already been deleted")
         
+        supplier.is_active = False 
+        return self.repo.update(supplier)
