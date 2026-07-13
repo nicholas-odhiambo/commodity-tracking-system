@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from app.db.session import get_db
-from app.schemas.suppliers import SupplierCreate
+from app.schemas.suppliers import SupplierCreate, SupplierUpdate
 from app.services.supplier_service import SupplierService
 from app.repositories.supplier_repository import SupplierRepository
 
@@ -40,4 +40,21 @@ def get_suppliers(db: Session = Depends(get_db)):
     repo = SupplierRepository(db)
     service = SupplierService(repo)
     return service.get_suppliers()
-    
+
+#update suppliers 
+@router.put("/suppliers/{supplier_id}")
+def update_supplier(supplier_id: int, payload: SupplierUpdate, db: Session = Depends(get_db)):
+    repo = SupplierRepository(db)
+    service = SupplierService(repo)
+
+    try:
+        result = service.update_supplier(
+            supplier_id = supplier_id,
+            name = payload.name,
+            phone = payload.phone,
+            email = payload.email,
+            is_active = payload.is_active
+        )
+        return result
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
