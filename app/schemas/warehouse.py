@@ -19,7 +19,7 @@ class WarehouseCreate(BaseModel):
     @classmethod
     def validate_capacity(cls, value: int):
         if value <= 0:
-            raise ValueError("Capacity should not be less or equal to zero")
+            raise ValueError("Capacity must be greater than zero")
         return value
 
 class WarehouseUpdate(BaseModel):
