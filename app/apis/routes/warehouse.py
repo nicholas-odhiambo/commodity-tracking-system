@@ -44,6 +44,7 @@ def get_warehouses(db: Session = Depends(get_db)):
 #update warehouse 
 @router.put("/warehouses/{warehouse_id}")
 def update_warehouse(warehouse_id: int, payload: WarehouseUpdate, db: Session = Depends(get_db)):
+
     repo = WarehouseRepository(db)
     service = WarehouseService(repo)
     try:
@@ -55,5 +56,17 @@ def update_warehouse(warehouse_id: int, payload: WarehouseUpdate, db: Session = 
             is_active = payload.is_active
         )
         return result 
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    
+
+## delete warehouse
+@router.delete("/warehouse/{warehouse_id}")
+def delete_warehouse(warehouse_id: int, db: Session = Depends(get_db)):
+    repo = WarehouseRepository(db)
+    service = WarehouseService(repo)
+    try:
+        result = service.delete_warehouse(warehouse_id)
+        return result
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))

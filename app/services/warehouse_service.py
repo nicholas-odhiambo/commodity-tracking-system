@@ -55,3 +55,16 @@ class WarehouseService:
             warehouse.is_active = is_active
 
         return self.repo.update(warehouse)
+    
+    ##delete warehouse
+    def delete_warehouse(self, warehouse_id: int):
+        warehouse = self.repo.get_by_id(warehouse_id)
+
+        if warehouse is None: 
+            raise ValueError("The warehouse does not exists")
+        
+        if warehouse.is_active is False:
+            raise ValueError("The warehouse has aleady been deleted")
+        
+        warehouse.is_active = False
+        return self.repo.update(warehouse)
