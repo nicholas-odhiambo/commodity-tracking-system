@@ -9,7 +9,7 @@ from app.repositories.warehouse_repository import WarehouseRepository
 router = APIRouter()
 
 #post warehouse
-@router.post("/warehouse")
+@router.post("/warehouses")
 def create_warehouse(payload: WarehouseCreate, db: Session = Depends(get_db)):
     repo = WarehouseRepository(db)
     service = WarehouseService(repo)
@@ -24,7 +24,7 @@ def create_warehouse(payload: WarehouseCreate, db: Session = Depends(get_db)):
         raise HTTPException(status_code=400, detail=str(e))
 
 #get by id
-@router.get("/warehouse/{warehouse_id}")
+@router.get("/warehouses/{warehouse_id}")
 def get_warehouse(warehouse_id: int, db: Session = Depends(get_db)):
     repo = WarehouseRepository(db)
     service = WarehouseService(repo)
@@ -33,3 +33,10 @@ def get_warehouse(warehouse_id: int, db: Session = Depends(get_db)):
         return result
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))
+
+#get all 
+@router.get("/warehouses")
+def get_warehouses(db: Session = Depends(get_db)):
+    repo = WarehouseRepository(db)
+    service = WarehouseService(repo)
+    return service.get_warehouses()

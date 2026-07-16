@@ -24,3 +24,7 @@ class WarehouseService:
         if warehouse is None:
             raise ValueError("Warehouse does not exist")
         return warehouse
+    
+    ##get all 
+    def get_warehouses(self):
+        return self.repo.get_all()

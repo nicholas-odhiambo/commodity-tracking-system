@@ -20,3 +20,8 @@ class WarehouseRepository:
     #get by_id
     def get_by_id(self, warehouse_id: int):
         return self.db.query(Warehouse).filter(Warehouse.id == warehouse_id,Warehouse.is_active).first()
+    
+
+    ## get all warehouses 
+    def get_all(self):
+        return self.db.query(Warehouse).filter(Warehouse.is_active).all()
