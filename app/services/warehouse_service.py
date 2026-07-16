@@ -28,3 +28,30 @@ class WarehouseService:
     ##get all 
     def get_warehouses(self):
         return self.repo.get_all()
+
+    ##update warehouse 
+    def update_warehouse(self, warehouse_id: int,  name: str | None, location : str | None, 
+                         capacity: int | None, is_active: bool | None):
+        warehouse = self.repo.get_by_id(warehouse_id)
+
+        if warehouse is None:
+            raise ValueError("Warehouse not found")
+        
+        if name is not None:
+            existing = self.repo.get_by_name(name)
+
+            if existing is not None and existing.id != warehouse.id:
+                raise ValueError("A warehouse with the name already exists")
+        
+            warehouse.name = name
+
+        if location is not None:
+            warehouse.location = location 
+        
+        if capacity is not None:
+            warehouse.capacity = capacity
+        
+        if is_active is not None:
+            warehouse.is_active = is_active
+
+        return self.repo.update(warehouse)

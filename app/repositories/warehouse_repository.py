@@ -25,3 +25,10 @@ class WarehouseRepository:
     ## get all warehouses 
     def get_all(self):
         return self.db.query(Warehouse).filter(Warehouse.is_active).all()
+    
+
+    ##update warehouse 
+    def update(self, warehouse: Warehouse):
+        self.db.commit()
+        self.db.refresh(warehouse)
+        return warehouse
