@@ -17,3 +17,10 @@ class WarehouseService:
             capacity = capacity
         )
         self.repo.create(warehouse)
+
+    ##get by id
+    def get_warehouse(self, warehouse_id: int):
+        warehouse = self.repo.get_by_id(warehouse_id)
+        if warehouse is None:
+            raise ValueError("Warehouse does not exist")
+        return warehouse

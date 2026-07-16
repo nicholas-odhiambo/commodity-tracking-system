@@ -16,3 +16,7 @@ class WarehouseRepository:
     #get warehouse by name
     def get_by_name(self, name: str):
         return self.db.query(Warehouse).filter(Warehouse.name == name).first()
+    
+    #get by_id
+    def get_by_id(self, warehouse_id: int):
+        return self.db.query(Warehouse).filter(Warehouse.id == warehouse_id,Warehouse.is_active).first()
