@@ -24,6 +24,12 @@ def create_warehouse(payload: WarehouseCreate, db: Session = Depends(get_db)):
         raise HTTPException(status_code=400, detail=str(e))
 
 #get by id
-@router.get("/warehouse/{warehouse-_id}")
-def get_by_id():
-    pass
+@router.get("/warehouse/{warehouse_id}")
+def get_warehouse(warehouse_id: int, db: Session = Depends(get_db)):
+    repo = WarehouseRepository(db)
+    service = WarehouseService(repo)
+    try: 
+        result = service.get_warehouse(warehouse_id)
+        return result
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
