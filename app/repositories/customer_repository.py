@@ -16,3 +16,7 @@ class CustomerRepository:
     #get customer name 
     def get_by_phone(self, phone:str ):
         return self.db.query(Customer).filter(Customer.phone == phone).first()
+
+    #get customer byID 
+    def get_by_id(self, customer_id: int):
+        return self.db.query(Customer).filter(Customer.id == customer_id, Customer.is_active).first()
