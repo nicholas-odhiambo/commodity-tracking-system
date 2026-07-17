@@ -29,3 +29,30 @@ class CustomerService:
     #get all customers 
     def get_customers(self):
         return self.repo.get_all()
+
+    # update all customers
+    def update_customer(self, customer_id: int, name: str | None, phone: str | None,
+                        email: str | None, is_active: bool | None):
+        customer = self.repo.get_by_id(customer_id)
+        
+        if customer is None:
+            raise ValueError("Customer not found")
+        
+        if phone is not None:
+            existing = self.repo.get_by_phone(phone)
+
+            if existing is not None and existing.id != customer.id:
+                raise ValueError("A customer with that phone number already exists")
+
+            customer.phone = phone 
+        
+        if name is not None:
+            customer.name = name 
+        
+        if email is not None:
+            customer.email = email
+        
+        if is_active is not None:
+            customer.is_active = is_active
+        
+        return self.repo.update(customer)

@@ -24,3 +24,9 @@ class CustomerRepository:
     #get all customers 
     def get_all(self):
         return self.db.query(Customer).filter(Customer.is_active).all()
+    
+    #update customers
+    def update(self, customer: Customer):
+        self.db.commit()
+        self.db.refresh(customer)
+        return customer
