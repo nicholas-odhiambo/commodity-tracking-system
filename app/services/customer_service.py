@@ -25,4 +25,7 @@ class CustomerService:
         if customer is None:
             raise ValueError("Customer not found")
         return customer
-        
+     
+    #get all customers 
+    def get_customers(self):
+        return self.repo.get_all()

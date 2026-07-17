@@ -33,3 +33,14 @@ def get_customer(customer_id: int, db: Session = Depends(get_db)):
         return result
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))
+
+#get all customers 
+@router.get("/customers")
+def get_customers(db: Session = Depends(get_db)):
+    repo = CustomerRepository(db)
+    service = CustomerService(repo)
+    try:
+        result = service.get_customers()
+        return result
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))

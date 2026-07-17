@@ -13,10 +13,14 @@ class CustomerRepository:
         self.db.refresh(customer)
         return customer
 
-    #get customer name 
+    #get customer phone 
     def get_by_phone(self, phone:str ):
         return self.db.query(Customer).filter(Customer.phone == phone).first()
 
     #get customer byID 
     def get_by_id(self, customer_id: int):
         return self.db.query(Customer).filter(Customer.id == customer_id, Customer.is_active).first()
+    
+    #get all customers 
+    def get_all(self):
+        return self.db.query(Customer).filter(Customer.is_active).all()
