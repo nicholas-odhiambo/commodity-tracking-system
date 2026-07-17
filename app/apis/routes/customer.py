@@ -62,3 +62,14 @@ def update_customer(customer_id: int, payload: CustomerUpdate,
         return result
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))
+
+#delete customer
+@router.delete("/customers/{customer_id}")
+def delete_customer(customer_id: int, db: Session = Depends(get_db)):
+    repo = CustomerRepository(db)
+    service = CustomerService(repo)
+    try:
+        result = service.delete_customer(customer_id)
+        return result
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))

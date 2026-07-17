@@ -56,3 +56,16 @@ class CustomerService:
             customer.is_active = is_active
         
         return self.repo.update(customer)
+
+    # detelete customer
+    def delete_customer(self, customer_id: int):
+        customer = self.repo.get_by_id(customer_id)
+
+        if customer is None:
+            raise ValueError("Customer does not exist")
+        
+        if customer.is_active is False:
+            raise ValueError("The customer has already been deleted")
+        
+        customer.is_active = False
+        return self.repo.update(customer)
