@@ -9,10 +9,10 @@ class CustomerCreate(BaseModel):
 
     @field_validator("phone", "name")
     @classmethod
-    def validate_phone(cls, value: str):
+    def validate_fields(cls, value: str):
         value = value.strip()
         if not value: 
-            raise ValueError("Phone cannot be empty or have white space.")
+            raise ValueError("Phone or name cannot be empty or have white space.")
         return value
 
 class CustomerUpdate(BaseModel):
