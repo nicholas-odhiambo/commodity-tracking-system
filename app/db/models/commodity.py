@@ -1,6 +1,6 @@
 from sqlalchemy import String, Boolean
 from typing import Optional
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base import Base
 
@@ -12,3 +12,7 @@ class Commodity(Base):
     unit_of_measure: Mapped[str] = mapped_column(String(30),nullable=False) 
     description: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
     is_active: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
+
+    ### relationship back to the purchaseitem
+    purchase_items = relationship("PurchaseItem",back_populates="commodity"
+)

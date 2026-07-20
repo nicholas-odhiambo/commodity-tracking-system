@@ -21,3 +21,8 @@ class PurchaseItem(Base):
     #relationships 
     purchase = relationship("Purchase")
     commodity = relationship("Commodity")
+
+    ## 
+    purchase = relationship("Purchase", back_populates="purchase_items")
+    commodity = relationship("Commodity", back_populates="purchase_items")
+

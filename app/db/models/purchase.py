@@ -16,5 +16,10 @@ class Purchase(Base):
     warehouse_id: Mapped[int] = mapped_column(ForeignKey("warehouses.id"), nullable=False)
     purchase_date: Mapped[datetime.datetime] =mapped_column(DateTime, server_default=func.now())
     is_active: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
+
+    ## relationships 
     supplier = relationship("Supplier")
     warehouse = relationship("Warehouse")
+
+    ##
+    purchase_items= relationship("PurchaseItem", back_populates="Purchase")

@@ -38,23 +38,6 @@ The primary objective of this project are to:
 - **API Testing:** Postman 
 - **Database Migratioons:** Alembic (Planned - am new to this)
 
-# Project Structure
-
-cts/
-│
-├── app/
-│   ├── api/
-│   ├── core/
-│   ├── db/
-│   ├── repositories/
-│   ├── schemas/
-│   ├── services/
-│   ├── utils/
-│   └── main.py
-│
-├── tests/
-├── requirements.txt
-└── README.md
 
 # Architecture
 
