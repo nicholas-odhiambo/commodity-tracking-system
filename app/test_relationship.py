@@ -1,5 +1,6 @@
 ## for testing relationships 
 
+from decimal import Decimal
 ##import database session 
 from app.db.session import SessionLocal
 
@@ -21,7 +22,45 @@ try:
         db.add(supplier)
         db.commit()
         db.refresh(supplier)
-    
+
+    warehouse = db.query(Warehouse).filter_by(name="The Millers").first()
+    if Warehouse is None:
+        warehouse = Warehouse(name="The Millers")
+        db.add(Warehouse)
+        db.commit()
+        db.refresh(warehouse)
+
+
+    ## A purchase
+    purchase = Purchase(
+        supplier_id=supplier.id,
+        warehouse_id=warehouse.id
+    )
+    db.add(purchase)
+    db.commit()
+    db.refresh(purchase)
+
+    ### purchaseItem 1
+    PurchaseItem(
+        purchase_id=purchase.id,
+        commodity_id=maize.id,
+        quantity=100, 
+        unit_price=Decimal("3500.00")
+    )  
+    db.add(PurchaseItem)
+    db.commit()
+    db.refresh(PurchaseItem) 
+
+     ### purchaseItem 2
+    PurchaseItem(
+        purchase_id=purchase.id,
+        commodity_id=beans.id,
+        quantity=100, 
+        unit_price=Decimal("3500.00")
+    )  
+    db.add(PurchaseItem)
+    db.commit()
+    db.refresh(PurchaseItem) 
 
 
 
