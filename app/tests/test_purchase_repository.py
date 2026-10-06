@@ -44,7 +44,7 @@ try:
         items = items
     )
 
-    #
+    ##
     print(f"Purchase ID: {purchase.id}")
     print(f"Supplier ID: {purchase.supplier_id}")
     print(f"Warehouse {purchase.warehouse_id}")
