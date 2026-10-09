@@ -1,4 +1,7 @@
 from fastapi import FastAPI
+
+from app.db import models
+
 from app.apis.routes.commodity import router as commodity_router
 from app.apis.routes.supplier import router as supplier_router
 from app.apis.routes.warehouse import router as warehouse_router

@@ -30,7 +30,7 @@ try:
             "unit_price": Decimal("3500.00")
         },
         {
-            "commodity_id": apples.id, 
+            "commodity_id": 89767, 
             "quantity": 100,
             "unit_price": Decimal("3500.00")
         }
