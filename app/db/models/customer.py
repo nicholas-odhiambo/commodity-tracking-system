@@ -1,9 +1,11 @@
-from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import String,Boolean, DateTime, func
-from typing import Optional
 import datetime
+from typing import Optional
+
+from sqlalchemy import Boolean, DateTime, String, func
+from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db.base import Base
+
 
 class Customer(Base):
     __tablename__ = "customers"
